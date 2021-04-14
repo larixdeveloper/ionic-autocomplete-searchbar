@@ -1,0 +1,34 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Contacts</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar
+      animated="true"
+      placeholder="Find your contact"
+      cancelButtonIcon="close-outline"
+      showCancelButton="focus"
+      showClearButton="focus"
+      cancelButtonText="Cancel"
+      inputmode="search"
+      debounce="500"
+      enterkeyhint="search"
+      (ionInput)="filterSuggestions($event)"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item-group *ngFor="let suggestion of suggestions">
+      <ion-item-divider>
+        <ion-label>{{suggestion.group}}</ion-label>
+      </ion-item-divider>
+      <ion-item
+        *ngFor="let child of suggestion.children; index as i"
+        [lines]="i === suggestion.children.length - 1 ? 'none' : undefined"
+      >
+        <ion-label>{{child.name}}</ion-label>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+</ion-content>
